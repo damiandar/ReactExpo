@@ -1,0 +1,66 @@
+ 
+import React from 'react';
+import { StyleSheet, Text,SafeAreaView,StatusBar, View,Button,Image,Platform, TouchableWithoutFeedback,TouchableOpacity,Alert} from 'react-native';
+import {useDimensions,useDeviceOrientation} from '@react-native-community/hooks'; 
+export default function App() {
+  const ClickTexto=()=> console.log("Apreto en el texto");
+  console.log(useDimensions());
+  console.log(useDeviceOrientation());
+  const {landscape}= useDeviceOrientation();
+  return (
+
+    <SafeAreaView  style={styles.container}>
+      
+      <Text numberOfLines={2} onPress={()=> console.log("Texto del cliente")}>
+        Hola 
+        Manola estamos aca reunidos para ver como funciona esto!</Text>
+      <Text onPress={ClickTexto}>
+        Evento 
+      </Text>
+      <TouchableWithoutFeedback onPress={ClickTexto}>
+          <Image source={require('./assets/icon.png')} style={styles.imagen} />
+      </TouchableWithoutFeedback>
+      
+      <TouchableOpacity onPress={()=> console.log("Touchable opacity")}>
+        <View style={{ width:200, height:30, backgroundColor:"dodgerblue" }}>
+          <Text>Vista</Text>
+        </View>
+      </TouchableOpacity>
+      
+      <Image 
+        blurRadius={3}
+        fadeDuration={1000}
+        source={{
+          width:200,
+          height:300,
+          uri:"https://picsum.photos/200/300",
+        }} 
+      />
+      <View style={{ backgroundColor:'red'}}>
+      <Text>Instalar npm i @react-native-community/hooks</Text>
+      <Button title="Tocar" style={otrosestilos, styles.container} onPress={()=> Alert.prompt("Boton","Mensaje",(text)=> console.log(text) )}></Button>
+      <Button title="Tocar" style={otrosestilos} onPress={()=> alert("Boton")}></Button>
+      <Button title="Tocar 2" onPress={()=> Alert.alert("Titulo","Mensaje",[
+        {text:"Si",onPress: ()=> alert("Apreto Si") },
+        {text:"No",onPress: ()=> alert("Apreto No") }
+      ])}></Button>
+      </View>
+
+      <StatusBar style="auto" /> 
+    </SafeAreaView>
+  );
+}
+const otrosestilos = {backgroundColor:"orange" };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imagen:{
+    height: Platform.OS=== "ios" ? StatusBar.currentHeight: 200,
+  
+
+  }
+});
